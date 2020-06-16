@@ -4898,7 +4898,7 @@ $color-blankstate-background: rgba($color-body-text, 0.1);
   position: relative;
   @include display-flexbox();
   @include align-items(center);
-  @include justify-content(flex-end);
+  @include justify-content(space-between);
 }
 
 ///
@@ -8724,3 +8724,27 @@ header.site-header.border-bottom.logo--left {
     width: 35%;
 }
 }
+
+div#SearchDrawer {
+  top: 119px;
+  height: 90px!important;
+}
+button.btn--link.site-header__icon.site-header__search-toggle.js-drawer-open-top {
+  padding: 0px;
+}
+
+
+@media only screen and (min-width: 750px){
+.site-header__account, .site-header__cart {
+    padding: 5px 75px 0 0;
+    bottom: 60px;
+}}
+
+a.site-header__icon.site-header__account {
+  PADDING-RIGHT: 0;
+}
+
+@media only screen and (max-width: 880px){
+  #cxlogin{
+     display: none;
+  }}
