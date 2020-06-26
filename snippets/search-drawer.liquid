@@ -6,7 +6,7 @@
           <input
             type="text"
             name="q"
-            placeholder="{{ 'general.search.placeholder' | t }}"
+            placeholder="{{ 'What are you looking for?' }}"
             role="combobox"
             aria-autocomplete="list"
             aria-owns="predictive-search-results"
@@ -23,10 +23,11 @@
         <button class="search-bar__submit search-form__submit"
           type="submit"
           data-search-form-submit>
-          {% include 'icon-search' %}
-          <span class="icon__fallback-text">{{ 'general.search.submit' | t }}</span>
+
+          SEARCH
+         
         </button>
-      </form>
+      </form> 
 
       <div class="search-bar__actions">
         <button type="button" class="btn--link search-bar__close js-drawer-close">

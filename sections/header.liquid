@@ -6,7 +6,7 @@
       }
     {% endif %}
 
-    {% if section.settings.align_logo == 'left' %}
+    {% if section.settings.align_logo == 'right' %}
       .site-header__logo-image {
         margin: 0;
       }
@@ -57,8 +57,10 @@
 
     {% endif %}
   {% endif %}
+  
 
   <header class="site-header{% if section.settings.align_logo == 'left' %} border-bottom logo--left{% else %} logo--center{% endif %}" role="banner">
+      {% include 'store-language' %}
     <div class="grid grid--no-gutters grid--table site-header__mobile-nav">
       {% if section.settings.align_logo == 'center' %}
         {%- assign logo_classes = 'medium-up--one-third medium-up--push-one-third logo-align--center' -%}
@@ -120,15 +122,49 @@
             <span class="icon__fallback-text">{{ 'layout.navigation.search' | t }}</span>
           </button>
 
+
+
+
+
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+
+
+
+
+          
+
+
+
           {% if shop.customer_accounts_enabled %}
             {% if customer %}
               <a href="{{ routes.account_url }}" class="site-header__icon site-header__account">
                 {% include 'icon-login' %}
+                <span id="cxlogin">SIGNIN/REGISTER </span>
                 <span class="icon__fallback-text">{{ 'layout.customer.account' | t }}</span>
               </a>
             {% else %}
               <a href="{{ routes.account_login_url }}" class="site-header__icon site-header__account">
                 {% include 'icon-login' %}
+                <span id="cxlogin">SIGNIN/REGISTER </span>
                 <span class="icon__fallback-text">{{ 'layout.customer.log_in' | t }}</span>
               </a>
             {% endif %}
