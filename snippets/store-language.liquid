@@ -8,10 +8,10 @@
                     {{ 'general.language.dropdown_label' | t }}
                 </h2>
                 <div class="disclosure" data-disclosure-locale>
-                    <button type="button" class="disclosure__toggle" aria-expanded="false" aria-controls="lang-list" aria-describedby="lang-heading" data-disclosure-toggle>
+                    <button aria-controls="lang-list" aria-describedby="lang-heading" aria-expanded="false" class="disclosure__toggle" data-disclosure-toggle type="button">
                         {{ form.current_locale.endonym_name }}
                     </button>
-                    <ul id="lang-list" class="disclosure-list" data-disclosure-list>
+                    <ul class="disclosure-list" data-disclosure-list id="lang-list">
                         {% for locale in form.available_locales %}
                             <li class="disclosure-list__item {% if locale.iso_code == form.current_locale.iso_code %}disclosure-list__item--current{% endif %}">
                                 <a class="disclosure-list__option" href="#" lang="{{ locale.iso_code }}" {% if locale.iso_code == form.current_locale.iso_code %} aria-current="true" {% endif %} data-value="{{ locale.iso_code }}" data-disclosure-option>
