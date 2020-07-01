@@ -1,35 +1,40 @@
-<div class="grid__item medium-up--one-half">
-  {%for block in section.blocks %}
-    <img  src = "{{block.settings.imagealt | img_url:'master'}}" />                
+<div class="lotus grid__item medium-up--one-half">
+  
+  <div class ="lotus1">
+    {%for block in section.blocks %}
+      <img  src = "{{block.settings.imagealt | img_url:'master'}}" />                
     {%endfor%}
-    </div>
-    
-    {% schema %}
-      {
-        "name": "alternate_rudsak",
-        "settings": [], 
-        "blocks" : [
-                      {  "type": "image",
-                         "name": "image block",
-                         "settings": [
-                                       {
-                                         "type" : "image_picker",
-                                         "label" : "your image",
-                                         "id" : "imagealt"
-                                        }
-                                      ]
+  </div >
+  <div class ="lotus1">
+  </div>
+</div>
+   
+   {% schema %}
+     {
+       "name": "alternate_rudsak",
+       "settings": [],
+       "blocks" : [
+                     {  "type": "image",
+                        "name": "image block",
+                        "settings": [
+                                      {
+                                        "type" : "image_picker",
+                                        "label" : "your image",
+                                        "id" : "imagealt"
+                                       }
+                                     ]
+                      }
+                    ],
+        "presets" : [    
+                       {    "category" : "image",
+                             "name": "image section alt"
                        }
-                     ],
-         "presets" : [    
-                        {    "category" : "image",
-                              "name": "image section alt"
-                        }
-                       
-                      ] 
-      }
-  {% endschema %}
-    
-    
-    
-    
-    
+                      
+                     ] 
+     }
+ {% endschema %}
+   
+   
+   
+   
+   

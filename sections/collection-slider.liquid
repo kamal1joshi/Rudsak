@@ -12,10 +12,8 @@
     {% endif %}
     <div class="section-header text-center">
         {{ section.settings.description  }}
-      </div>
-  
+    </div>
     {%- assign collection = collections[section.settings.collection] -%}
-  
     {% case section.settings.grid %}
       {% when 2 %}
         {%- assign max_height = 530 -%}
@@ -30,7 +28,6 @@
         {%- assign max_height = 195 -%}
         {%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
     {% endcase %}
-  
     {%- assign product_limit = section.settings.grid | times: 3 -%}
     <ul data-slides= "{{section.settings.grid}}" class="grid grid--uniform grid--view-items collection-slider">
       {% for product in collection.products limit: product_limit %}
@@ -38,7 +35,6 @@
           {% include 'product-card-grid', max_height: max_height, product: product, show_vendor: section.settings.show_vendor %}
         </li>
       {% else %}
-  
         {% for i in (1..product_limit) %}
           <li class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
             <div class="grid-view-item product-card">
@@ -56,7 +52,6 @@
         {% endfor %}
       {% endfor %}
     </ul>
-  
     {% if section.settings.show_view_all %}
       <hr class="hr--invisible" aria-hidden="true" />
       <div class="text-center">
@@ -65,9 +60,8 @@
         </a>
       </div>
     {% endif %}
-  
   </div>
-  </div> 
+</div> 
   
   
   {% schema %}

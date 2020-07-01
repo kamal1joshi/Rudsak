@@ -7562,24 +7562,22 @@ function onYouTubeIframeAPIReady() {
 
 $(theme.init);
 
-$(document).ready(function(){
-  
-  
-  $('.collection-slider').each(function(){
-      var num_slides = 2;
-      if(window.innerWidth >= 750)
-      {
-        var num_slides = $(this).data('slides');
-      }
-    $(this).slick({slidesToShow:num_slides,  infinite: true, dots: true, arrows: false, slidesToScroll: 5});                       
-});
+$(document).ready(function () {
 
-// $('.collection-slider').slick({
-//   infinite: true,
-//   slidesToShow: 5,
-//   slidesToScroll: 5,
-//   dots: true,
-//   arrows: false
-// });
+
+	$('.collection-slider').each(function () {
+		var num_slides = 2;
+		if (window.innerWidth >= 750) {
+			var num_slides = $(this).data('slides');
+		}
+		$(this).slick({
+			slidesToShow: num_slides,
+			infinite: true,
+			dots: true,
+			arrows: false,
+			slidesToScroll: 5
+		});
+	});
+
 
 });
