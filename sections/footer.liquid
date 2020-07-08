@@ -139,15 +139,47 @@
 
 
 <footer class="site-footer" role="contentinfo" data-section-id="{{ section.id }}" data-section-type="footer-section">
-    <div class="page-width">
+    
+    <div class = "footer_section_black">
+        <div>
+            <div class="site-footer__item-inner site-footer__item-inner--newsletter">
+                <div class="site-footer__newsletter">
+                    <form method="post" action="/contact#ContactFooter" id="ContactFooter" accept-charset="UTF-8" class="contact-form" novalidate="novalidate">
+                        <input type="hidden" name="form_type" value="customer">
+                        <input type="hidden" name="utf8" value="✓">
+                        <input name="contact[tags]" type="hidden" value="newsletter">
+                        <div class="input-group ">
+                            <span class="input-group__btn">
+                                <button class="btn newsletter__submit" id="Subscribe" name="commit" type="submit">
+                                    <span class="newsletter__submit-text--large">STAY CONNECTED</span>
+                                </button>
+                            </span>
+                            <input type="email" name="contact[email]" id="ContactFooter-email" class="input-group__field newsletter__input" value="" placeholder="ENTER YOUR EMAIL" aria-label="Email address" aria-required="true" required="" autocorrect="off" autocapitalize="off">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div> 
+        <div class = "footer_section_black_link_container">
+            {%-for block in section.blocks -%}
+                {%- if block.type == 'collection'-%}
+                    <div class = "footer_section_black_link"> 
+                        <a href="https://firelotus.myshopify.com/collections/   {{block.settings.footer_collection}}"> 
+                            {{block.settings.footer_collection | upcase }}</a>    
+                    </div> 
+                {%-endif-%} 
+            {%endfor%}
+        </div>
+    </div>
+    
+    <div class="page-width lotus_black">
         <div class="site-footer__content">
-            {%- for block in section.blocks -%}
-
+            {%- for block in section.blocks limit:2 -%}
                 <div class="site-footer__item
-                                                                                                                                            {% if section.blocks.size == 1 %} site-footer__item--center{% endif %}
-                                                                                                                                            {{ footer_item }}
-                                                                                                                                            {% if block.type == 'newsletter' and section.blocks.size == 3 %}site-footer-newsletter__one-half{% endif %}" {{ block.shopify_attributes }}>
-                    <div class="site-footer__item-inner site-footer__item-inner--{{ block.type }}">
+                    {% if section.blocks.size == 1 %} site-footer__item--center{% endif %}
+                    {{ footer_item }}
+                   {% if block.type == 'newsletter' and section.blocks.size == 3 %}site-footer-newsletter__one-half{% endif %}" {{ block.shopify_attributes }}>
+                       <div class="site-footer__item-inner site-footer__item-inner--{{ block.type }}">
 
                         {%- if block.settings.title -%}
                             <p class="h4">{{ block.settings.title | escape }}</p>
@@ -166,7 +198,13 @@
                                         {%- endif -%}
                                         <input name="contact[tags]" type="hidden" value="newsletter">
                                         <div class="input-group {% if form.errors %} input-group--error{% endif %}">
-                                            <input type="email" name="contact[email]" id="{{ formId }}-email" class="input-group__field newsletter__input{% if form.errors %} input--error{% endif %}" value="{{ form.email }}" placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}" aria-label="{{ 'general.newsletter_form.email_placeholder' | t }}" aria-required="true" required autocorrect="off" autocapitalize="off" {% if form.errors %} aria-invalid="true" aria-describedby="{{ formId }}-email-error" data-form-status {% endif %}>
+                                            <input type="email" name="contact[email]" id="{{ formId }}
+                                             -email" class="input-group__field newsletter__input{% if form.errors %}
+                                                            input--error{% endif %}" value="{{ form.email }}" placeholder="
+                                            {{ 'general.newsletter_form.email_placeholder' | t }}" aria-label="
+                                               {{ 'general.newsletter_form.email_placeholder' | t }}" aria-required="true" 
+                                                   required autocorrect="off" autocapitalize="off" {% if form.errors %} aria-invalid="true" 
+                                                   aria-describedby="{{ formId }}-email-error" data-form-status {% endif %}>
                                             <span class="input-group__btn">
                                                 <button class="btn newsletter__submit" id="Subscribe" name="commit" type="submit">
                                                     <span class="newsletter__submit-text--large">{{ 'general.newsletter_form.submit' | t }}</span>
@@ -208,86 +246,14 @@
 
                         {%- endcase -%}
 
-                    </div>
+                       </div>
                 </div>
             {%- endfor -%}
-        </div>
-    </div>
-
-    <hr class="site-footer__hr">
-
-    {%- assign socials = "Facebook Twitter Pinterest Instagram Tumblr Snapchat YouTube Vimeo" | split: ' ' -%}
-
-    <div class="page-width">
-        <div class="grid grid--no-gutters small--text-center grid--footer-float-right">
-
-
-            {%- if show_selectors -%}
-                <div class="grid__item one-half small--one-whole">
-                    {%- form 'localization', class: 'selectors-form' -%}
-                        {%- if locale_selector -%}
-                            <div class="selectors-form__item">
-                                <h2 class="visually-hidden" id="lang-heading">
-                                    {{ 'general.language.dropdown_label' | t }}
-                                </h2>
-
-                                <div class="disclosure" data-disclosure-locale>
-                                    <button aria-controls="lang-list" aria-describedby="lang-heading" aria-expanded="false" class="disclosure__toggle" data-disclosure-toggle type="button">
-                                        {{ form.current_locale.endonym_name }}
-                                    </button>
-                                    <ul class="disclosure-list" data-disclosure-list id="lang-list">
-                                        {% for locale in form.available_locales %}
-                                            <li class="disclosure-list__item {% if locale.iso_code == form.current_locale.iso_code %}disclosure-list__item--current{% endif %}">
-                                                <a class="disclosure-list__option" href="#" lang="{{ locale.iso_code }}" {% if locale.iso_code == form.current_locale.iso_code %} aria-current="true" {% endif %} data-value="{{ locale.iso_code }}" data-disclosure-option>
-                                                    {{ locale.endonym_name }}
-                                                </a>
-                                            </li>
-                                        {%- endfor -%}
-                                    </ul>
-                                    <input type="hidden" name="locale_code" id="LocaleSelector" value="{{ form.current_locale.iso_code }}" data-disclosure-input/>
-                                </div>
-                            </div>
-                        {%- endif -%}
-
-                        {%- if currency_selector -%}
-                            <div class="selectors-form__item">
-                                <h2 class="visually-hidden" id="currency-heading">
-                                    {{ 'general.currency.dropdown_label' | t }}
-                                </h2>
-
-                                <div class="disclosure" data-disclosure-currency>
-                                    <button aria-controls="currency-list" aria-describedby="currency-heading" aria-expanded="false" class="disclosure__toggle" data-disclosure-toggle type="button">
-                                        {{ form.current_currency.iso_code }}
-                                        {%- if form.current_currency.symbol -%}
-                                            {{ form.current_currency.symbol }}
-                                        {%- endif -%}
-                                    </button>
-                                    <ul class="disclosure-list" data-disclosure-list id="currency-list">
-                                        {% for currency in form.available_currencies %}
-                                            <li class="disclosure-list__item {% if currency.iso_code == form.current_currency.iso_code %}disclosure-list__item--current{% endif %}">
-                                                <a class="disclosure-list__option" href="#" {% if currency.iso_code == form.current_currency.iso_code %} aria-current="true" {% endif %} data-value="{{ currency.iso_code }}" data-disclosure-option>
-                                                    {{ currency.iso_code }}
-                                                    {%- if currency.symbol -%}
-                                                        {{ currency.symbol }}
-                                                    {%- endif -%}
-                                                </a>
-                                            </li>
-                                        {%- endfor -%}
-                                    </ul>
-                                    <input type="hidden" name="currency_code" id="CurrencySelector" value="{{ form.current_currency.iso_code }}" data-disclosure-input/>
-                                </div>
-                            </div>
-                        {%- endif -%}
-                    {%- endform -%}
-                </div>
-            {%- else -%}
-                <div class="grid__item small--hide {{ payment_width_class }} {% if show_payment_icons %}site-footer-item-center-vertically{% endif %}">{{ payment_icon_markup }}</div>
-            {%- endif -%}
-
-
-            <div class="grid__item {% if show_selectors or show_payment_icons %}one-half{% endif %} small--one-whole site-footer-item-tall">
+            {%- assign socials = "Facebook Tumblr Pinterest Instagram Twitter Snapchat YouTube Vimeo" | split: ' ' -%}
+          <div class = "socialicons_footer site-footer__item-inner site-footer__item-inner--link_list">
                 {%- if social_icons -%}
-                    <ul class="list--inline site-footer__social-icons social-icons site-footer__icon-list">
+                   <div> <H4>CONNECT WITH US</H4></div>
+                   <div class = "iconmaki">   <ul class="list--inline site-footer__social-icons social-icons site-footer__icon-list">
                         {%- for social in socials -%}
                             {%- assign social_link = social | prepend: 'social_' | append: '_link' | downcase -%}
                             {%- assign icon_link = social | prepend: 'icon-' | downcase -%}
@@ -309,40 +275,56 @@
                                 </a>
                             </li>
                         {%- endif -%}
-                    </ul>
-                {%- else -%}
-                    <div class="small--hide site-footer-item-align-right {% if show_selectors or show_payment_icons %}site-footer-item-center-vertically{% endif %}">
+                        </ul>
+                        {%- else -%}
+                       <div class="small--hide site-footer-item-align-right {% if show_selectors or show_payment_icons %}        site-footer-item-center-vertically{% endif %}">
                         <small class="site-footer__copyright-content">&copy;
                             {{ 'now' | date: "%Y" }},
                             {{ shop.name | link_to: routes.root_url }}</small>
-                        <small class="site-footer__copyright-content site-footer__copyright-content-powered-by">{{ powered_by_link }}</small>
+                           <small class="site-footer__copyright-content site-footer__copyright-content-powered-by">{{ powered_by_link }}</small>
+                        </div>
                     </div>
                 {%- endif -%}
-            </div>
-
-            {%- if show_selectors -%}
-                <div class="grid__item small--hide {{ payment_width_class }}">{{ payment_icon_markup }}</div>
-            {%- endif -%}
-
-            <div class="grid__item medium-up--hide {{ payment_width_class }} small--one-whole">{{ payment_icon_markup }}</div>
-
-            {%- if social_icons and show_selectors -%}
-                <div class="grid__item small--hide site-footer-item-align-right {% if show_payment_icons %}one-half{% endif %}">
-                    <small class="site-footer__copyright-content">&copy;
-                        {{ 'now' | date: "%Y" }},
-                        {{ shop.name | link_to: routes.root_url }}</small>
-                    <small class="site-footer__copyright-content site-footer__copyright-content--powered-by">{{ powered_by_link }}</small>
-                </div>
-            {%- endif -%}
-
-            <div class="grid__item small--one-whole {{ copyright_show_class }} site-footer-item-align-right">
-                <small class="site-footer__copyright-content">&copy;
-                    {{ 'now' | date: "%Y" }},
-                    {{ shop.name | link_to: routes.root_url }}</small>
-                <small class="site-footer__copyright-content site-footer__copyright-content--powered-by">{{ powered_by_link }}</small>
-            </div>
+          </div>
         </div>
     </div>
+
+    <div class="footer_white">
+        {% form 'currency' %}
+            <select name="currency">
+                {% for currency in shop.enabled_currencies %}
+                    {% if currency == cart.currency %}
+                    <option selected="true">{{currency.iso_code}} {{currency.symbol}}</option>
+                    {% else %}
+                    <option>{{currency.iso_code}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        {% endform %}
+                  
+        <div class ="lotusfooter_links">
+            <div class = "link1">
+                <a href="https://firelotus.myshopify.com/pages/privacy-policy-for-fire-store">PRIVACY POLICY</a>
+            </div>
+            <div class = "link1">
+                <a href="https://firelotus.myshopify.com/pages/fvdgrahdffg">TERMS AND CONDITIONS</a>
+            </div>
+            <div class = "link1">
+                <a href="https://firelotus.myshopify.com/pages/firelotus-sitemap">SITE MAP</a>
+            </div>
+        </div>
+                
+        {%- if show_selectors -%}
+            <div class="grid__item small--hide {{ payment_width_class }}">{{ payment_icon_markup }}</div>
+        {%- endif -%}
+        <div class="grid__item medium-up--hide {{ payment_width_class }} small--one-whole">{{ payment_icon_markup }}</div>
+        <div class = "copyright">
+            <small class="site-footer__copyright-content">&copy;
+            {{ "RUDSAK " }}{{ "2016. " }}{{ "ALL RIGHTS RESERVED." }} </small>
+        </div>
+         
+    </div>
+
 </footer>
 
 
@@ -369,7 +351,7 @@
         "zh-CN": "页脚",
         "zh-TW": "頁尾"
     },
-    "max_blocks": 4,
+    "max_blocks": 5,
     "settings": [
         {
             "type": "header",
@@ -623,6 +605,16 @@
     ],
     "blocks": [
         {
+            "type": "collection",
+            "name": "collection block",
+            "settings": [
+                {
+                    "type": "collection",
+                    "id": "footer_collection",
+                    "label": "Footer collection"
+                }
+            ]
+        }, {
             "type": "link_list",
             "name": {
                 "da": "Menu",
@@ -878,7 +870,7 @@
                         "en": "Subscribers will be added to your “accepts marketing” [customer list.](/admin/customers?query=&accepts_marketing=1)",
                         "es": "Se añadirá los suscriptores a tu [lista de clientes.](/admin/customers?query=&accepts_marketing=1) \"acepta marketing\".",
                         "fi": "Tilaajat lisätään \"hyväksyy markkinointi\" [-asiakasluetteloosi. ](/admin/customers?query=&accepts_marketing=1)",
-                        "fr": "Les abonnés seront ajoutés à votre [liste de clients](/admin/customers?query=&accepts_marketing=1) « Accepte le marketing ».",
+                        "fr": "Les abonnés seront ajoutés à votre [liste de clients](/admin/customers?query=&accepts_marketing=1) « Accepte le marketing ».",
                         "hi": "सदस्यों को आपकी “मार्केटिंग स्वीकार करता है” [customer list.](/admin/customers?query=&accepts_marketing=1) में जोड़ दिया जाएगा",
                         "it": "Gli iscritti verranno aggiunti al tuo [elenco clienti.](/admin/customers?query=&accepts_marketing=1) «accetta marketing»",
                         "ja": "購読者は「マーケティングを受け入れる」[顧客リスト](/admin/customers?query=&accepts_marketing=1) に追加されます。",

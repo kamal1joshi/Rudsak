@@ -1,0 +1,38 @@
+{%-for block in section.blocks -%}
+ {%- if block.type == 'collection'-%}
+<a href="https://firelotus.myshopify.com/collections/{{block.settings.footer_collection}}"> {{block.settings.footer_collection}}  </a>              
+ {%-endif-%} 
+{%endfor%}
+
+{% schema %}
+  {
+    "name": "topfooter",
+    "settings": [],
+    "blocks": [
+                {
+                    "type": "collection",
+                    "name": "collection block",
+                    "settings": [
+                        {
+                            "type": "collection",
+                            "id": "footer_collection",
+                            "label": "Footer collection"
+                        }
+                    ]
+                }
+    ],
+    "presets": [
+        {
+            "category": "subscription",
+            "name": "collection section footer"
+        }
+    ]
+  }
+{% endschema %}
+  
+  
+  
+  
+ 
+  
+  
