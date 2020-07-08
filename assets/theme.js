@@ -7581,3 +7581,10 @@ $(document).ready(function () {
 
 
 });
+
+
+$('.shopify-currency-form select').on('change', function() {
+  $(this)
+    .parents('form')
+    .submit();
+});

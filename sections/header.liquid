@@ -46,9 +46,7 @@
                 {% else %}
                     <a href="{{ section.settings.message_link }}" class="announcement-bar announcement-bar--link">
                     {% endif %}
-
                     <p class="announcement-bar__message">{{ section.settings.message_text | escape }}</p>
-
                     {% if section.settings.message_link == blank %}
                     </div>
             {% else %}
@@ -60,7 +58,19 @@
 
 
     <header class="site-header{% if section.settings.align_logo == 'left' %} border-bottom logo--left{% else %} logo--center{% endif %}" role="banner">
-        {% include 'store-language' %}
+      
+        <div class="locale-selectors__content" style="max-width: 1200px; margin-left: 51px; margin-right: 51px; padding-left: 55px; padding-right: 55px;">
+            <form action="/localization" method="POST"><input type="hidden" name="form_type" value="localization">
+                <input type="hidden" name="utf8" value="✓">
+                <input type="hidden" name="_method" value="put">
+                <input type="hidden" name="return_to" value="/">
+                <select class="locale-selectors__selector" name="locale_code">
+                    <option value="en">ENGLISH</option>
+                    <option value="hi">हिन्दी</option>
+                </select>
+            </form>
+        </div>
+
         <div class="grid grid--no-gutters grid--table site-header__mobile-nav">
             {% if section.settings.align_logo == 'center' %}
                 {%- assign logo_classes = 'medium-up--one-third medium-up--push-one-third logo-align--center' -%}
@@ -68,7 +78,7 @@
                 {%- assign logo_classes = 'medium-up--one-quarter logo-align--left' -%}
             {% endif %}
 
-            <div class="grid__item {{ logo_classes }}">
+        <div class="grid__item {{ logo_classes }}">
                 {% comment %}
           Use the uploaded logo from theme settings if enabled.
           Site name gets precedence with H1 tag on homepage, div on other pages.

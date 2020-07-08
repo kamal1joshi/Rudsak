@@ -6,11 +6,12 @@
   </div>    
   <div class="White-item fslide">
     {% if section.settings.title != blank %}
-      <div class="section-header text-center">
-        <h2>{{ section.settings.title | escape }}</h2>
+      <div class="section-header text-left firex">
+        {% assign beatles = section.settings.title | split: " " %}  
+        <h2>{{ beatles.first }}</h2> {{section.settings.title | remove_first: beatles.first}}
       </div>
     {% endif %}
-    <div class="section-header text-center">
+    <div class="section-header text-left firey">
         {{ section.settings.description  }}
     </div>
     {%- assign collection = collections[section.settings.collection] -%}
